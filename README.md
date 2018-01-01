@@ -1,3 +1,3 @@
-# pockt-knife
+# back-pockt
 
-Python 3.7 application
+Python 3.6 application
