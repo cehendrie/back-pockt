@@ -10,13 +10,15 @@ class AccessToken(object):
         self.request_token = request_token
 
     def retrieve(self):
+        rt = self.request_token.retrieve()
+
         url = 'https://getpocket.com/v3/oauth/authorize'
         headers = {
             'X-Accept': 'application/json',
             'Content-Type': 'application/json; charset=UTF8'}
         payload = {
             'consumer_key': self.customer_key,
-            'code': self.request_token}
+            'code': rt}
         r = requests.post(url, headers=headers, data=json.dumps(payload))
 
         j = r.json()
