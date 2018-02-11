@@ -1,6 +1,10 @@
 import json
+import logging
 
 import requests
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 
 class AccessToken(object):
@@ -22,5 +26,7 @@ class AccessToken(object):
         r = requests.post(url, headers=headers, data=json.dumps(payload))
 
         j = r.json()
+
+        logger.info("access_token: {}".format(j['access_token']))
 
         return j['access_token']

@@ -1,6 +1,10 @@
 import json
+import logging
 
 import requests
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 
 class RequestToken(object):
@@ -26,5 +30,7 @@ class RequestToken(object):
         r = requests.post(url, headers=headers, data=json.dumps(payload))
 
         j = r.json()
+
+        logger.info("request_token: {}".format(j['code']))
 
         return j['code']
