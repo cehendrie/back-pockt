@@ -1,6 +1,10 @@
 import json
+import logging
 
 import requests
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 
 class PocketRequest(object):
@@ -18,5 +22,7 @@ class PocketRequest(object):
             'count': '10',
             'detailType': 'complete'}
         r = requests.get(url, headers=headers, data=json.dumps(payload))
+
+        logger.info("response text: {}".format(r.text))
 
         return r.text
