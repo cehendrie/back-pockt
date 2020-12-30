@@ -20,7 +20,8 @@ def arg_parser():
     args = argparser.parse_args()
     return args
 
-def get_pocket_data(consumer_key, access_token):
+def get_pocket_data(consumer_key, access_token, offset):
+    count = 10
     headers = {
         'X-Accept': 'application/json',
         'Content-Type': 'application/json; charset=UTF8'
@@ -29,8 +30,8 @@ def get_pocket_data(consumer_key, access_token):
         'consumer_key': consumer_key,
         'access_token': access_token,
         'sort': 'newest',
-        'count': '5',
-        'offset': 0,
+        'count': count,
+        'offset': (count * offset),
         'detailType': 'simple'
     }
     r = requests.get(
@@ -40,8 +41,9 @@ def get_pocket_data(consumer_key, access_token):
     return r.json()
 
 def main(consumer_key, access_token):
-    data = get_pocket_data(consumer_key, access_token)
-    print(data)
+    for offset in range(3)
+        data = get_pocket_data(consumer_key, access_token, offset)
+        print(data)
 
 if __name__ == '__main__':
     args = arg_parser()
