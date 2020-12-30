@@ -30,6 +30,7 @@ def get_pocket_data(consumer_key, access_token):
         'access_token': access_token,
         'sort': 'newest',
         'count': '5',
+        'offset': 0,
         'detailType': 'simple'
     }
     r = requests.get(
