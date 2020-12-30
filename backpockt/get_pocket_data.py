@@ -28,6 +28,7 @@ def get_pocket_data(consumer_key, access_token):
     payload = {
         'consumer_key': consumer_key,
         'access_token': access_token,
+        'sort': 'newest',
         'count': '5',
         'detailType': 'simple'
     }
