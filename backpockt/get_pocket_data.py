@@ -21,7 +21,7 @@ def arg_parser():
     return args
 
 def get_pocket_data(consumer_key, access_token, offset):
-    count = 20
+    count = 3
     headers = {
         'X-Accept': 'application/json',
         'Content-Type': 'application/json; charset=UTF8'
@@ -40,17 +40,26 @@ def get_pocket_data(consumer_key, access_token, offset):
         data=json.dumps(payload))
     return r.json()
 
-def save_pocket_data(json_data):
+def generate_article_data(json_data):
     articles = []
     for id, data in json_data["list"].items():
-        article = (id, data["resolved_title"], data["resolved_url"], data["excerpt"], data["time_added"])
-        articles.append(article)
-    print(articles)
+        article = {
+            "id": id, 
+            "resolved_title": data["resolved_title"],
+            "resolved_url": data["resolved_url"],
+            "excerpt": data["excerpt"],
+            "time_added": data["time_added"]
+        }
+        articles.append(json.dumps(article))
+    return articles
 
 def main(consumer_key, access_token):
-    for offset in range(3):
+    data = []
+    for offset in range(2):
         json_data = get_pocket_data(consumer_key, access_token, offset)
-        save_pocket_data(json_data)
+        articles = generate_article_data(json_data)
+        data.extend(articles)
+    print(data)
 
 if __name__ == '__main__':
     args = arg_parser()
