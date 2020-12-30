@@ -41,8 +41,11 @@ def get_pocket_data(consumer_key, access_token, offset):
     return r.json()
 
 def save_pocket_data(json_data):
+    articles = []
     for id, data in json_data["list"].items():
-        print(f"id={id}, data={data}")
+        article = (id, data["resolved_title"], data["resolved_url"], data["excerpt"], data["time_added"])
+        articles.append(article)
+    print(articles)
 
 def main(consumer_key, access_token):
     for offset in range(3):
