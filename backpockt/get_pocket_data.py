@@ -23,7 +23,8 @@ def arg_parser():
     return args
 
 def get_pocket_data(consumer_key, access_token, offset):
-    count = 3
+    print(f"retrieving next articles: {offset}")
+    count = 50
     headers = {
         'X-Accept': 'application/json',
         'Content-Type': 'application/json; charset=UTF8'
@@ -56,20 +57,28 @@ def generate_article_data(json_data):
     return articles
 
 def save_article_data(articles):
-    # build path to current directory and filename
     file = os.path.join(os.getcwd(), f"back-pockt-db-{datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}.txt")
     with open(file, 'w+') as f:
         for article in articles:
             f.write(article + "\n")
 
+def is_more_articles(num_articles, num_request):
+    return num_articles == num_request
+
 def main(consumer_key, access_token):
+    more_articles = True
+    offset = 0
     data = []
-    for offset in range(2):
+    since = []
+    while more_articles:
         json_data = get_pocket_data(consumer_key, access_token, offset)
         articles = generate_article_data(json_data)
         data.extend(articles)
-    print(data)
+        since.append(json_data["since"])
+        offset += 1
+        more_articles = is_more_articles(len(json_data["list"].items()), 50)
     save_article_data(data)
+    print(f"store latest value for next run... {since}")
 
 if __name__ == '__main__':
     args = arg_parser()
