@@ -36,7 +36,7 @@ def get_pocket_data(consumer_key, access_token, since):
     payload = {
         'consumer_key': consumer_key,
         'access_token': access_token,
-        'sort': 'newest',
+        'sort': 'oldest',
         'since': since,
         'detailType': 'simple'
     }
@@ -69,6 +69,7 @@ def main(consumer_key, access_token, since):
     json_data = get_pocket_data(consumer_key, access_token, since)
     data = generate_article_data(json_data)
     save_article_data(data)
+    print(f"number articles retrieved: {len(data)}")
     print(f"store since value for next run... {json_data['since']}")
 
 if __name__ == '__main__':
