@@ -37,7 +37,7 @@ def get_pocket_data(consumer_key, access_token, count, offset):
     payload = {
         'consumer_key': consumer_key,
         'access_token': access_token,
-        'sort': 'newest',
+        'sort': 'oldest',
         'count': count,
         'offset': (count * offset),
         'detailType': 'simple'
