@@ -2,10 +2,10 @@ from setuptools import setup
 
 setup(
     name='back-pockt',
-    description='a simple application for archive pocket articles',
+    description='a simple application to retrieve Pocket articles',
     version='0.0.1',
     packages=['backpockt', ],
-    url='http://github.com/cehendrie/muzik-dumpster',
+    url='http://github.com/cehendrie/back-pockt',
     author='Charles Hendrie',
     author_email='cehendrie@outlook.com',
     license='MIT',
