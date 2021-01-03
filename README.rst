@@ -98,7 +98,7 @@ Response::
 
 Example API Request
 ^^^^^^^^^^^^^^^^^^^
-Retrieve Pocket articles using the Pocket API::
+Retrieve Pocket articles using the access token with the Pocket API::
 
     curl 
         -i \
