@@ -6,19 +6,31 @@ back-pockt is a cli utility for offline achiving and indexing of Pocket articles
 Usage
 =====
 
-$ python3 backpockt/get_pocket_data.py -k customer_key -t access_token
+Download Articles
+^^^^^^^^^^^^^^^^^
+
+``$ python3 backpockt/get_pocket_data.py -k customer_key -t access_token``
+
+Download Recent
+^^^^^^^^^^^^^^^
+
+``$ python3 backpockt/get_pocket_delta.py -k customer_key -t access_token -s unix_timestamp``
 
 How To
 ======
 
-How to retrieve a Pocket access token
--------------------------------------
+Pocket Access Token
 
-The following are the manual steps to retrieve a Pocket access token. The process to generate an access token requires visiting the https://www.getpocket.com website to allow a user to authorize the "app" and verify the user's credentials. The app only needs to be authorized once for each access token. Once the app has been authorized by a user, an access token can be created and used to interact with the Pocket APIs.
+The following are the manual steps to retrieve a Pocket access token. The process to generate an access token requires 
+visiting the https://www.getpocket.com website to allow a user to authorize the "app" and verify the user's 
+credentials. The app only needs to be authorized once for each access token. Once the app has been authorized by a 
+user, an access token can be created and used to interact with the Pocket APIs.
 
-The web authorization page redirects the "user" to a web page specificed by the user. In a non-cli application, this would be the apps web page or app. In this case, it's just a blank page.
+The web authorization page redirects the "user" to a web page specificed by the user. In a non-cli application, this 
+would be the apps web page or app. In this case, it's just a blank page.
 
-If for some reason access is revoked, a new access token can be created using these steps. For development purposes, access can be revoked by visiting the web page https://getpocket.com/connected_accounts .
+If for some reason access is revoked, a new access token can be created using these steps. For development purposes, 
+access can be revoked by visiting the web page https://getpocket.com/connected_accounts .
 
 See https://getpocket.com/developer/docs/authentication for the authorization API details.
 
