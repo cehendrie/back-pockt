@@ -65,8 +65,10 @@ Step 3
 ^^^^^^
 Redirect user to Pocket to continue authorization
 
-- This step needs to be done once manually in a web browser for each access token
-- Once the access token is created, store in a secure place to for use with the Pocket APIs.
+- This step needs to be done once manually in a web browser before an access token can be created
+- This step is a bit confusing, but once the below URL is pasted into a browser, a pocket page should open with an Authorize button
+- Select the Authorize button and the browser will be redirected to the non-existance web page defined in the redirect_url property (just ignore this)
+- The redirect_uri should contain the app name defined by the customer key in step #1
 
 URL
 
@@ -81,6 +83,8 @@ Receive the callback from Pocket
 Step 5
 ^^^^^^
 Convert a request token into a Pocket access token
+
+- Once the access token is created, store in a secure place to for use with the Pocket APIs.
 
 Request::
 
@@ -104,4 +108,4 @@ Retrieve Pocket articles using the access token with the Pocket API::
         -i \
         -H "Content-Type: application/json; charset=UTF8" \
         -d "{\"consumer_key\":\"ae940261-4c91-4f07-9c73-a65d6a975e5d\", \"access_token\":\"6c14c378-ca68-4673-b544-cfc8fcae61ca\", \"count\":\"10\", \"detailType\":\"complete\"}" \
-        -X GET https://getpocket.com/v3/get
+        -X POST https://getpocket.com/v3/get
