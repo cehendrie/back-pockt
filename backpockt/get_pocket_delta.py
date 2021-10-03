@@ -40,7 +40,7 @@ def get_pocket_data(consumer_key, access_token, since):
         'since': since,
         'detailType': 'simple'
     }
-    r = requests.get(
+    r = requests.post(
         'https://getpocket.com/v3/get', 
         headers=headers, 
         data=json.dumps(payload))
@@ -49,13 +49,16 @@ def get_pocket_data(consumer_key, access_token, since):
 def generate_article_data(json_data):
     articles = []
     for id, data in json_data["list"].items():
-        article = {
-            "id": id, 
-            "resolved_title": data["resolved_title"],
-            "resolved_url": data["resolved_url"],
-            "excerpt": data["excerpt"],
-            "time_added": data["time_added"]
-        }
+        if 'resolved_title' in data and 'resolved_url' in data:
+            article = {
+                "id": id, 
+                "resolved_title": data["resolved_title"],
+                "resolved_url": data["resolved_url"],
+                "excerpt": data["excerpt"],
+                "time_added": data["time_added"]
+            }
+        else:
+            print(f"missing title and url... id: {id}")
         articles.append(json.dumps(article))
     return articles
 
@@ -69,6 +72,7 @@ def main(consumer_key, access_token, since):
     json_data = get_pocket_data(consumer_key, access_token, since)
     data = generate_article_data(json_data)
     save_article_data(data)
+    print(f"data: {data}")
     print(f"number articles retrieved: {len(data)}")
     print(f"store since value for next run... {json_data['since']}")
 
